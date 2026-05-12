@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aryan Garg — Data Scientist & Traveller</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0f0f;
+    --paper: #f5f2eb;
+    --paper2: #ede9df;
+    --accent: #c84b2f;
+    --accent2: #2a6049;
+    --muted: #6b6560;
+    --border: rgba(15,15,15,0.12);
+    --travel: #1a3a5c;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 48px;
+    background: var(--paper);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(8px);
+  }
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    font-size: 13px;
+    font-family: 'DM Mono', monospace;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a.travel-link { color: var(--travel); }
+  .nav-links a.travel-link:hover { color: var(--travel); opacity: 0.7; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 70px;
+  }
+  .hero-left {
+    padding: 80px 48px 80px 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right: 1px solid var(--border);
+  }
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .hero-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(52px, 6vw, 80px);
+    line-height: 1.05;
+    color: var(--ink);
+    margin-bottom: 24px;
+  }
+  .hero-name em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero-desc {
+    font-size: 16px;
+    color: var(--muted);
+    max-width: 420px;
+    margin-bottom: 40px;
+    line-height: 1.7;
+  }
+  .hero-cta {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    border: 1px solid var(--ink);
+    color: var(--ink);
+    background: transparent;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  .btn:hover { background: var(--ink); color: var(--paper); }
+  .btn-fill { background: var(--ink); color: var(--paper); }
+  .btn-fill:hover { background: var(--accent); border-color: var(--accent); }
+
+  .hero-right {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--paper2);
+    overflow: hidden;
+  }
+  .hero-identity-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 48px;
+    width: 100%;
+    max-width: 400px;
+  }
+  .identity-card {
+    border: 1px solid var(--border);
+    padding: 28px;
+    background: var(--paper);
+    position: relative;
+    transition: transform 0.3s;
+  }
+  .identity-card:hover { transform: translateX(6px); }
+  .identity-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+  }
+  .identity-card.data::before { background: var(--accent); }
+  .identity-card.travel::before { background: var(--travel); }
+  .card-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .identity-card.data .card-label { color: var(--accent); }
+  .identity-card.travel .card-label { color: var(--travel); }
+  .card-heading {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    margin-bottom: 8px;
+  }
+  .card-body { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 32px;
+    left: 48px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .hero-scroll::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--muted);
+  }
+
+  /* SECTIONS */
+  section { padding: 96px 48px; }
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(36px, 4vw, 52px);
+    line-height: 1.1;
+    margin-bottom: 48px;
+    max-width: 600px;
+  }
+
+  /* ABOUT */
+  #about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+    border-top: 1px solid var(--border);
+  }
+  .about-text { font-size: 16px; color: var(--muted); line-height: 1.8; }
+  .about-text p + p { margin-top: 16px; }
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-top: 40px;
+  }
+  .stat-box {
+    background: var(--paper);
+    padding: 24px;
+  }
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 40px;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .stat-desc { font-size: 12px; color: var(--muted); margin-top: 6px; font-family: 'DM Mono', monospace; }
+
+  .about-right { padding-top: 80px; }
+  .info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+  }
+  .info-label { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: 0.05em; }
+  .info-val { color: var(--ink); font-weight: 500; }
+  .info-val a { color: var(--accent); text-decoration: none; }
+  .info-val a:hover { text-decoration: underline; }
+
+  /* SKILLS */
+  #skills {
+    background: var(--paper2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .skill-group {
+    background: var(--paper2);
+    padding: 32px;
+  }
+  .skill-group-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .skill-list { list-style: none; }
+  .skill-list li {
+    font-size: 14px;
+    color: var(--muted);
+    padding: 5px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .skill-list li::before {
+    content: '—';
+    color: var(--accent);
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+  }
+
+  /* PROJECTS / EXPERIENCE */
+  #projects { border-top: 1px solid var(--border); }
+  .projects-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .project-item {
+    display: grid;
+    grid-template-columns: 200px 1fr auto;
+    gap: 40px;
+    align-items: start;
+    padding: 36px;
+    background: var(--paper);
+    transition: background 0.2s;
+    text-decoration: none;
+    color: inherit;
+  }
+  .project-item:hover { background: var(--paper2); }
+  .project-meta {}
+  .project-year {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+  }
+  .project-type {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    padding: 3px 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 1px solid;
+  }
+  .project-type.solo { border-color: var(--accent); color: var(--accent); }
+  .project-type.team { border-color: var(--accent2); color: var(--accent2); }
+  .project-content {}
+  .project-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+  .project-tagline {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 14px;
+    font-style: italic;
+  }
+  .project-desc { font-size: 14px; color: var(--muted); line-height: 1.7; max-width: 540px; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+  .project-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    padding: 4px 10px;
+    background: var(--paper2);
+    color: var(--muted);
+    border: 1px solid var(--border);
+    letter-spacing: 0.05em;
+  }
+  .project-arrow {
+    font-size: 20px;
+    color: var(--muted);
+    transition: transform 0.2s, color 0.2s;
+    margin-top: 4px;
+  }
+  .project-item:hover .project-arrow { transform: translate(4px, -4px); color: var(--accent); }
+
+  /* EDUCATION */
+  #education { background: var(--paper2); border-top: 1px solid var(--border); }
+  .edu-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .edu-item {
+    background: var(--paper2);
+    padding: 32px 36px;
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 40px;
+  }
+  .edu-period {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .edu-degree {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    margin-bottom: 4px;
+  }
+  .edu-school { font-size: 14px; color: var(--accent); margin-bottom: 10px; }
+  .edu-location { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); margin-bottom: 12px; }
+  .edu-courses { display: flex; flex-wrap: wrap; gap: 6px; }
+  .edu-course {
+    font-size: 11px;
+    font-family: 'DM Mono', monospace;
+    padding: 3px 10px;
+    background: var(--paper);
+    border: 1px solid var(--border);
+    color: var(--muted);
+  }
+
+  /* TRAVEL TEASER */
+  #travel {
+    border-top: 1px solid var(--border);
+    background: var(--travel);
+    color: var(--paper);
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .travel-bg-text {
+    position: absolute;
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(80px, 15vw, 180px);
+    color: rgba(255,255,255,0.04);
+    white-space: nowrap;
+    user-select: none;
+    letter-spacing: -0.02em;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+  .travel-content { position: relative; z-index: 1; max-width: 560px; padding: 48px; }
+  .travel-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(245,242,235,0.5);
+    margin-bottom: 20px;
+  }
+  .travel-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(40px, 5vw, 64px);
+    line-height: 1.1;
+    margin-bottom: 20px;
+    color: var(--paper);
+  }
+  .travel-title em { font-style: italic; color: #f5c07a; }
+  .travel-desc { font-size: 15px; color: rgba(245,242,235,0.65); line-height: 1.7; margin-bottom: 32px; }
+  .travel-coming {
+    display: inline-block;
+    border: 1px solid rgba(245,242,235,0.3);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 12px 28px;
+    color: rgba(245,242,235,0.6);
+  }
+  .travel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 32px;
+  }
+  .travel-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: rgba(245,242,235,0.2);
+  }
+  .travel-dot.active { background: #f5c07a; }
+
+  /* CONTACT */
+  #contact { border-top: 1px solid var(--border); }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .contact-left .section-title { margin-bottom: 24px; }
+  .contact-desc { font-size: 15px; color: var(--muted); line-height: 1.7; margin-bottom: 40px; }
+  .contact-links { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .contact-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 24px;
+    background: var(--paper);
+    text-decoration: none;
+    color: var(--ink);
+    transition: background 0.2s;
+  }
+  .contact-link:hover { background: var(--paper2); }
+  .contact-link-label { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+  .contact-link-val { font-size: 14px; color: var(--ink); }
+  .contact-link-arrow { color: var(--muted); transition: transform 0.2s; }
+  .contact-link:hover .contact-link-arrow { transform: translate(4px, -4px); color: var(--accent); }
+
+  .contact-right { padding-top: 100px; }
+  .availability-box {
+    border: 1px solid var(--border);
+    padding: 32px;
+    background: var(--paper2);
+  }
+  .avail-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .avail-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--accent2);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  .avail-title { font-family: 'DM Serif Display', serif; font-size: 24px; margin-bottom: 10px; }
+  .avail-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .avail-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+  .avail-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    padding: 4px 10px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    background: var(--paper);
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 28px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+  footer a { color: var(--muted); text-decoration: none; }
+  footer a:hover { color: var(--ink); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-eyebrow { animation: fadeUp 0.6s ease both; }
+  .hero-name { animation: fadeUp 0.6s 0.1s ease both; }
+  .hero-desc { animation: fadeUp 0.6s 0.2s ease both; }
+  .hero-cta { animation: fadeUp 0.6s 0.3s ease both; }
+  .hero-identity-cards { animation: fadeUp 0.7s 0.2s ease both; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-links { gap: 20px; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { min-height: 50vh; }
+    .hero-left { padding: 60px 24px 40px; }
+    section { padding: 64px 24px; }
+    #about { grid-template-columns: 1fr; gap: 40px; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .project-item { grid-template-columns: 1fr; gap: 16px; }
+    .edu-item { grid-template-columns: 1fr; gap: 10px; }
+    .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+    .contact-right { padding-top: 0; }
+    footer { flex-direction: column; gap: 10px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Aryan Garg</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#travel" class="travel-link">Travels</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="padding:0;">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Portfolio — Data Science & Life</div>
+    <h1 class="hero-name">Aryan<br><em>Garg</em></h1>
+    <p class="hero-desc">Data Scientist and ML Engineer bridging raw data and real-world products. Also a traveller collecting stories from the road.</p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-fill">View Projects</a>
+      <a href="https://github.com/Aryan-garg-1" target="_blank" class="btn">GitHub ↗</a>
+      <a href="mailto:naryagarg@gmail.com" class="btn">Email Me</a>
+    </div>
+    <div class="hero-scroll">scroll to explore</div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-identity-cards">
+      <div class="identity-card data">
+        <div class="card-label">Identity 01 — Career</div>
+        <div class="card-heading">Data Scientist</div>
+        <div class="card-body">MSc Data Science @ Napoli Federico II. Machine learning, predictive modelling, and iOS apps that solve real problems.</div>
+      </div>
+      <div class="identity-card travel">
+        <div class="card-label">Identity 02 — Life</div>
+        <div class="card-heading">Traveller</div>
+        <div class="card-body">From Jaipur to Naples and beyond. Collecting places, people, and perspectives — one trip at a time.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-left">
+    <div class="section-label">About Me</div>
+    <h2 class="section-title">Data tells a story. I make sure it's heard.</h2>
+    <div class="about-text">
+      <p>I'm a self-motivated Data Scientist currently pursuing my Master's in Data Science at the Università di Napoli Federico II, Italy. My work sits at the intersection of machine learning, statistical analysis, and product thinking.</p>
+      <p>I don't just build models — I build things people use. During the Apple Developer Academy at Federico II, I shipped iOS apps through the full lifecycle: ideation, design, development, and TestFlight beta testing with real users.</p>
+      <p>Originally from Jaipur, Rajasthan, I've built a career on curiosity — whether that's exploring a new dataset or a new city.</p>
+    </div>
+    <div class="about-stats">
+      <div class="stat-box">
+        <div class="stat-num">6+</div>
+        <div class="stat-desc">projects shipped</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">2</div>
+        <div class="stat-desc">Apple Dev Academy programs</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">3+</div>
+        <div class="stat-desc">years in data science</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">2</div>
+        <div class="stat-desc">languages spoken</div>
+      </div>
+    </div>
+  </div>
+  <div class="about-right">
+    <div class="info-row">
+      <span class="info-label">Location</span>
+      <span class="info-val">Naples, Italy (from Jaipur, India)</span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">Email</span>
+      <span class="info-val"><a href="mailto:naryagarg@gmail.com">naryagarg@gmail.com</a></span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">Phone</span>
+      <span class="info-val">+91 894 901 2489</span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">GitHub</span>
+      <span class="info-val"><a href="https://github.com/Aryan-garg-1" target="_blank">Aryan-garg-1 ↗</a></span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">LinkedIn</span>
+      <span class="info-val"><a href="https://linkedin.com/in/aryan-garg-029b41233" target="_blank">aryan-garg ↗</a></span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">Languages</span>
+      <span class="info-val">English, Hindi</span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">Status</span>
+      <span class="info-val" style="color:var(--accent2);">● Open to Opportunities</span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">Interests</span>
+      <span class="info-val">Data Science · AI · Mobile Dev · Travel</span>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">Technical Skills</div>
+  <h2 class="section-title">Tools I work with.</h2>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <div class="skill-group-title">Languages</div>
+      <ul class="skill-list">
+        <li>Python</li>
+        <li>Swift</li>
+        <li>SQL</li>
+        <li>HTML & CSS</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Data Science & ML</div>
+      <ul class="skill-list">
+        <li>Machine Learning</li>
+        <li>Supervised & Unsupervised Learning</li>
+        <li>Predictive Modeling</li>
+        <li>Statistical Analysis</li>
+        <li>Feature Engineering</li>
+        <li>Model Evaluation</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Data & Analysis</div>
+      <ul class="skill-list">
+        <li>Pandas & NumPy</li>
+        <li>Matplotlib & Seaborn</li>
+        <li>Data Cleaning & Preprocessing</li>
+        <li>Data Warehousing</li>
+        <li>Database Design</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">iOS Development</div>
+      <ul class="skill-list">
+        <li>Swift & SwiftUI</li>
+        <li>Xcode</li>
+        <li>MultipeerConnectivity</li>
+        <li>Core Data</li>
+        <li>TestFlight</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Tools & Design</div>
+      <ul class="skill-list">
+        <li>Git & GitHub</li>
+        <li>Figma</li>
+        <li>Miro</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Soft Skills</div>
+      <ul class="skill-list">
+        <li>Team Collaboration</li>
+        <li>Communication</li>
+        <li>Problem Solving</li>
+        <li>Interpersonal Skills</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">Experience & Projects</div>
+  <h2 class="section-title">Things I've built.</h2>
+  <div class="projects-list">
+
+    <a href="https://github.com/Aryan-garg-1/ChatApp" target="_blank" class="project-item">
+      <div class="project-meta">
+        <div class="project-year">2022 – 2023</div>
+        <div class="project-type solo">Solo</div>
+      </div>
+      <div class="project-content">
+        <div class="project-name">ChatApp</div>
+        <div class="project-tagline">Talk to nearby strangers — no internet required</div>
+        <div class="project-desc">Offline proximity-based iOS chat using Apple's MultipeerConnectivity framework. Devices auto-discover and connect via Bluetooth and Wi-Fi Direct. Custom SwiftUI chat bubbles with hand-drawn Bézier shapes, JSON messaging, and local data persistence.</div>
+        <div class="project-tags">
+          <span class="project-tag">Swift</span>
+          <span class="project-tag">SwiftUI</span>
+          <span class="project-tag">MultipeerConnectivity</span>
+          <span class="project-tag">Xcode</span>
+        </div>
+      </div>
+      <div class="project-arrow">↗</div>
+    </a>
+
+    <a href="https://github.com/Aryan-garg-1/Leafy" target="_blank" class="project-item">
+      <div class="project-meta">
+        <div class="project-year">Jan – Apr 2023</div>
+        <div class="project-type team">Team</div>
+      </div>
+      <div class="project-content">
+        <div class="project-name">Leafy</div>
+        <div class="project-tagline">Focus during your studies</div>
+        <div class="project-desc">iOS productivity app for stressed university students. Timer for study and break sessions, emotion journaling after each session, and full session history via Core Data. Shipped on TestFlight and iterated based on real user feedback.</div>
+        <div class="project-tags">
+          <span class="project-tag">Swift</span>
+          <span class="project-tag">SwiftUI</span>
+          <span class="project-tag">Core Data</span>
+          <span class="project-tag">TestFlight</span>
+        </div>
+      </div>
+      <div class="project-arrow">↗</div>
+    </a>
+
+    <a href="https://github.com/Aryan-garg-1/MateZ" target="_blank" class="project-item">
+      <div class="project-meta">
+        <div class="project-year">Feb – Jun 2023</div>
+        <div class="project-type team">Team</div>
+      </div>
+      <div class="project-content">
+        <div class="project-name">MateZ</div>
+        <div class="project-tagline">Power up your play with perfect partners</div>
+        <div class="project-desc">iOS app to connect gamers worldwide through safe and positive matchmaking. Designed user interaction features for inclusive community building. Scalable architecture built in Swift with Xcode and Git version control.</div>
+        <div class="project-tags">
+          <span class="project-tag">Swift</span>
+          <span class="project-tag">SwiftUI</span>
+          <span class="project-tag">Figma</span>
+          <span class="project-tag">Xcode</span>
+        </div>
+      </div>
+      <div class="project-arrow">↗</div>
+    </a>
+
+    <a href="https://github.com/Aryan-garg-1/Brush-it-up" target="_blank" class="project-item">
+      <div class="project-meta">
+        <div class="project-year">Sep – Dec 2022</div>
+        <div class="project-type team">Team</div>
+      </div>
+      <div class="project-content">
+        <div class="project-name">ToothAid</div>
+        <div class="project-tagline">Paediatric habit formation tool</div>
+        <div class="project-desc">Gamified iOS app encouraging healthy brushing habits in children. Applied UI/UX design principles to create an engaging, child-friendly interface with logical programme flow guiding user interactions.</div>
+        <div class="project-tags">
+          <span class="project-tag">Swift</span>
+          <span class="project-tag">SwiftUI</span>
+          <span class="project-tag">Figma</span>
+          <span class="project-tag">Miro</span>
+        </div>
+      </div>
+      <div class="project-arrow">↗</div>
+    </a>
+
+    <a href="https://github.com/Aryan-garg-1/MacroServer" target="_blank" class="project-item">
+      <div class="project-meta">
+        <div class="project-year">2023</div>
+        <div class="project-type solo">Solo</div>
+      </div>
+      <div class="project-content">
+        <div class="project-name">MacroServer + MAcroClient</div>
+        <div class="project-tagline">Macro automation, server + client</div>
+        <div class="project-desc">Python-powered backend server for macro automation, paired with a native macOS Swift client. Full-stack personal tool from architecture to deployment.</div>
+        <div class="project-tags">
+          <span class="project-tag">Python</span>
+          <span class="project-tag">Swift</span>
+          <span class="project-tag">macOS</span>
+        </div>
+      </div>
+      <div class="project-arrow">↗</div>
+    </a>
+
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-label">Education & Certifications</div>
+  <h2 class="section-title">Where I learned.</h2>
+  <div class="edu-list">
+
+    <div class="edu-item">
+      <div class="edu-period">Nov 2021 – Present</div>
+      <div>
+        <div class="edu-degree">MSc Data Science</div>
+        <div class="edu-school">Università di Napoli Federico II</div>
+        <div class="edu-location">Naples, Italy</div>
+        <div class="edu-courses">
+          <span class="edu-course">Machine Learning</span>
+          <span class="edu-course">Data Analysis</span>
+          <span class="edu-course">Predictive Modeling</span>
+          <span class="edu-course">Data Processing</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="edu-item">
+      <div class="edu-period">Sep 2022 – Jun 2023</div>
+      <div>
+        <div class="edu-degree">Apple Developer Academy Program</div>
+        <div class="edu-school">Apple Developer Academy @ Federico II</div>
+        <div class="edu-location">Naples, Italy</div>
+        <div class="edu-courses">
+          <span class="edu-course">Swift & SwiftUI</span>
+          <span class="edu-course">Xcode</span>
+          <span class="edu-course">Figma</span>
+          <span class="edu-course">Miro</span>
+          <span class="edu-course">Team Collaboration</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="edu-item">
+      <div class="edu-period">Jan – Apr 2023</div>
+      <div>
+        <div class="edu-degree">Federico II Apple Foundation Program</div>
+        <div class="edu-school">Università di Napoli Federico II</div>
+        <div class="edu-location">Naples, Italy</div>
+      </div>
+    </div>
+
+    <div class="edu-item">
+      <div class="edu-period">Jul 2017 – Jul 2020</div>
+      <div>
+        <div class="edu-degree">Bachelor of Computer Applications (BCA)</div>
+        <div class="edu-school">S.S. Jain Subodh P.G. Autonomous College</div>
+        <div class="edu-location">Jaipur, Rajasthan, India</div>
+        <div class="edu-courses">
+          <span class="edu-course">Data Structures</span>
+          <span class="edu-course">Algorithms</span>
+          <span class="edu-course">Database Management</span>
+          <span class="edu-course">Web Development</span>
+          <span class="edu-course">Cybersecurity</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- TRAVEL -->
+<section id="travel">
+  <div class="travel-bg-text">Wander</div>
+  <div class="travel-content">
+    <div class="travel-label">Chapter 02 — The Traveller</div>
+    <h2 class="travel-title">Beyond the <em>data,</em><br>there is a world.</h2>
+    <p class="travel-desc">From the pink city of Jaipur to the streets of Naples — I collect places the way others collect data points. This section is coming soon: stories, photographs, and routes from the road.</p>
+    <div class="travel-coming">Coming Soon — Stories Loading</div>
+    <div class="travel-dots">
+      <div class="travel-dot active"></div>
+      <div class="travel-dot"></div>
+      <div class="travel-dot"></div>
+      <div class="travel-dot"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-grid">
+    <div class="contact-left">
+      <div class="section-label">Contact</div>
+      <h2 class="section-title">Let's work together.</h2>
+      <p class="contact-desc">Open to opportunities in Data Science, Machine Learning, and iOS Development — Europe and Remote. Feel free to reach out for collaborations, roles, or just a conversation.</p>
+      <div class="contact-links">
+        <a href="mailto:naryagarg@gmail.com" class="contact-link">
+          <div>
+            <div class="contact-link-label">Email</div>
+            <div class="contact-link-val">naryagarg@gmail.com</div>
+          </div>
+          <span class="contact-link-arrow">↗</span>
+        </a>
+        <a href="https://linkedin.com/in/aryan-garg-029b41233" target="_blank" class="contact-link">
+          <div>
+            <div class="contact-link-label">LinkedIn</div>
+            <div class="contact-link-val">aryan-garg-029b41233</div>
+          </div>
+          <span class="contact-link-arrow">↗</span>
+        </a>
+        <a href="https://github.com/Aryan-garg-1" target="_blank" class="contact-link">
+          <div>
+            <div class="contact-link-label">GitHub</div>
+            <div class="contact-link-val">Aryan-garg-1</div>
+          </div>
+          <span class="contact-link-arrow">↗</span>
+        </a>
+        <a href="tel:+918949012489" class="contact-link">
+          <div>
+            <div class="contact-link-label">Phone</div>
+            <div class="contact-link-val">+91 894 901 2489</div>
+          </div>
+          <span class="contact-link-arrow">↗</span>
+        </a>
+      </div>
+    </div>
+    <div class="contact-right">
+      <div class="availability-box">
+        <div class="avail-label"><div class="avail-dot"></div>Available Now</div>
+        <div class="avail-title">Open to Opportunities</div>
+        <div class="avail-desc">Currently pursuing MSc Data Science and actively looking for roles where I can contribute across data science, machine learning, or iOS development.</div>
+        <div class="avail-tags">
+          <span class="avail-tag">Data Scientist</span>
+          <span class="avail-tag">ML Engineer</span>
+          <span class="avail-tag">iOS Developer</span>
+          <span class="avail-tag">Data Analyst</span>
+          <span class="avail-tag">Europe</span>
+          <span class="avail-tag">Remote</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2025 Aryan Garg — Data Scientist & Traveller</span>
+  <span>Built with HTML · Hosted on GitHub Pages · <a href="https://github.com/Aryan-garg-1" target="_blank">github.com/Aryan-garg-1</a></span>
+</footer>
+
+</body>
+</html>
