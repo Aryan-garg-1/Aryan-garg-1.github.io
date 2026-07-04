@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aryan Garg — Data Scientist & Traveller</title>
+<title>Aryan Garg — Data Scientist & ML Engineer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -16,12 +16,11 @@
     --muted: #6b6560;
     --border: rgba(15,15,15,0.12);
     --travel: #1a3a5c;
+    --gold: #b8922a;
+    --ml: #5c3d8f;
   }
-
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; }
-
   body {
     background: var(--paper);
     color: var(--ink);
@@ -33,544 +32,309 @@
 
   /* NAV */
   nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 18px 48px;
-    background: var(--paper);
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 16px 48px;
+    background: rgba(245,242,235,0.95);
     border-bottom: 1px solid var(--border);
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(12px);
   }
-  .nav-logo {
-    font-family: 'DM Serif Display', serif;
-    font-size: 20px;
-    color: var(--ink);
-    text-decoration: none;
-  }
-  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-logo { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--ink); text-decoration: none; }
+  .nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
   .nav-links a {
-    font-size: 13px;
-    font-family: 'DM Mono', monospace;
-    color: var(--muted);
-    text-decoration: none;
-    letter-spacing: 0.04em;
-    transition: color 0.2s;
+    font-size: 12px; font-family: 'DM Mono', monospace;
+    color: var(--muted); text-decoration: none; letter-spacing: 0.05em; transition: color 0.2s;
   }
   .nav-links a:hover { color: var(--ink); }
-  .nav-links a.travel-link { color: var(--travel); }
-  .nav-links a.travel-link:hover { color: var(--travel); opacity: 0.7; }
+  .nav-cta {
+    background: var(--ink); color: var(--paper) !important;
+    padding: 8px 18px; font-size: 11px !important; letter-spacing: 0.06em;
+  }
+  .nav-cta:hover { background: var(--accent); color: var(--paper) !important; }
 
   /* HERO */
   .hero {
     min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding-top: 70px;
+    display: grid; grid-template-columns: 1fr 1fr;
+    padding-top: 56px;
   }
   .hero-left {
-    padding: 80px 48px 80px 48px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    padding: 80px 52px 80px 52px;
+    display: flex; flex-direction: column; justify-content: center;
     border-right: 1px solid var(--border);
+    position: relative;
   }
   .hero-eyebrow {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.15em;
-    color: var(--accent);
-    text-transform: uppercase;
-    margin-bottom: 20px;
+    font-family: 'DM Mono', monospace; font-size: 11px;
+    letter-spacing: 0.18em; color: var(--accent); text-transform: uppercase; margin-bottom: 22px;
+    display: flex; align-items: center; gap: 12px;
   }
+  .hero-eyebrow::before { content: ''; display: block; width: 28px; height: 1px; background: var(--accent); }
   .hero-name {
     font-family: 'DM Serif Display', serif;
-    font-size: clamp(52px, 6vw, 80px);
-    line-height: 1.05;
-    color: var(--ink);
-    margin-bottom: 24px;
+    font-size: clamp(54px, 6vw, 84px);
+    line-height: 1.03; color: var(--ink); margin-bottom: 6px;
   }
-  .hero-name em {
-    font-style: italic;
-    color: var(--accent);
+  .hero-name em { font-style: italic; color: var(--accent); }
+  .hero-role {
+    font-family: 'DM Mono', monospace; font-size: 13px;
+    color: var(--muted); letter-spacing: 0.06em; margin-bottom: 28px;
   }
-  .hero-desc {
-    font-size: 16px;
-    color: var(--muted);
-    max-width: 420px;
-    margin-bottom: 40px;
-    line-height: 1.7;
-  }
-  .hero-cta {
-    display: flex;
-    gap: 14px;
-    flex-wrap: wrap;
-  }
+  .hero-desc { font-size: 15px; color: var(--muted); max-width: 400px; margin-bottom: 44px; line-height: 1.8; }
+  .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 52px; }
   .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 24px;
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 0.05em;
-    text-decoration: none;
-    border: 1px solid var(--ink);
-    color: var(--ink);
-    background: transparent;
-    transition: all 0.2s;
-    cursor: pointer;
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 11px 22px; font-family: 'DM Mono', monospace;
+    font-size: 11px; letter-spacing: 0.06em; text-decoration: none;
+    border: 1px solid var(--ink); color: var(--ink);
+    background: transparent; transition: all 0.22s; cursor: pointer;
   }
   .btn:hover { background: var(--ink); color: var(--paper); }
   .btn-fill { background: var(--ink); color: var(--paper); }
   .btn-fill:hover { background: var(--accent); border-color: var(--accent); }
 
-  .hero-right {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .hero-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+  .chip {
+    font-family: 'DM Mono', monospace; font-size: 10px; padding: 5px 12px;
+    letter-spacing: 0.07em; border: 1px solid var(--border); color: var(--muted);
     background: var(--paper2);
-    overflow: hidden;
   }
-  .hero-identity-cards {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 48px;
-    width: 100%;
-    max-width: 400px;
-  }
-  .identity-card {
-    border: 1px solid var(--border);
-    padding: 28px;
-    background: var(--paper);
-    position: relative;
-    transition: transform 0.3s;
-  }
-  .identity-card:hover { transform: translateX(6px); }
-  .identity-card::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 3px;
-  }
-  .identity-card.data::before { background: var(--accent); }
-  .identity-card.travel::before { background: var(--travel); }
-  .card-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-  }
-  .identity-card.data .card-label { color: var(--accent); }
-  .identity-card.travel .card-label { color: var(--travel); }
-  .card-heading {
-    font-family: 'DM Serif Display', serif;
-    font-size: 22px;
-    margin-bottom: 8px;
-  }
-  .card-body { font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .chip.ml { border-color: rgba(92,61,143,0.3); color: var(--ml); background: rgba(92,61,143,0.05); }
+  .chip.dl { border-color: rgba(200,75,47,0.25); color: var(--accent); background: rgba(200,75,47,0.05); }
+  .chip.ds { border-color: rgba(42,96,73,0.3); color: var(--accent2); background: rgba(42,96,73,0.05); }
 
-  .hero-scroll {
-    position: absolute;
-    bottom: 32px;
-    left: 48px;
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--muted);
-    letter-spacing: 0.1em;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  .hero-right {
+    position: relative; display: flex; align-items: center;
+    justify-content: center; background: var(--paper2); overflow: hidden;
   }
-  .hero-scroll::before {
-    content: '';
-    display: block;
-    width: 40px;
-    height: 1px;
-    background: var(--muted);
+  .hero-right-inner { padding: 60px 48px; width: 100%; max-width: 420px; }
+  .stat-ticker {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+    background: var(--border); border: 1px solid var(--border); margin-bottom: 24px;
   }
+  .ticker-cell {
+    background: var(--paper2); padding: 24px 22px;
+    transition: background 0.2s;
+  }
+  .ticker-cell:hover { background: var(--paper); }
+  .ticker-num {
+    font-family: 'DM Serif Display', serif; font-size: 38px;
+    color: var(--ink); line-height: 1; margin-bottom: 6px;
+  }
+  .ticker-label { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.08em; line-height: 1.4; }
+  .hero-bio-card {
+    border: 1px solid var(--border); padding: 26px;
+    background: var(--paper); position: relative; overflow: hidden;
+  }
+  .hero-bio-card::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 3px; background: linear-gradient(180deg, var(--accent) 0%, var(--ml) 100%);
+  }
+  .bio-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+  .bio-title { font-family: 'DM Serif Display', serif; font-size: 19px; margin-bottom: 10px; }
+  .bio-body { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+  /* TICKER BAR */
+  .ticker-bar {
+    background: var(--ink); color: var(--paper); padding: 10px 0;
+    overflow: hidden; white-space: nowrap; border-top: none; border-bottom: none;
+  }
+  .ticker-track {
+    display: inline-flex; gap: 0; animation: marquee 28s linear infinite;
+  }
+  .ticker-item {
+    font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.1em;
+    padding: 0 32px; color: rgba(245,242,235,0.7);
+  }
+  .ticker-item span { color: var(--accent); margin-right: 10px; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
   /* SECTIONS */
-  section { padding: 96px 48px; }
+  section { padding: 88px 52px; }
   .section-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 14px;
+    font-family: 'DM Mono', monospace; font-size: 11px;
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px;
+    display: flex; align-items: center; gap: 12px;
   }
+  .section-label::before { content: ''; display: block; width: 20px; height: 1px; background: var(--accent); }
   .section-title {
     font-family: 'DM Serif Display', serif;
-    font-size: clamp(36px, 4vw, 52px);
-    line-height: 1.1;
-    margin-bottom: 48px;
-    max-width: 600px;
+    font-size: clamp(34px, 3.8vw, 50px); line-height: 1.1; margin-bottom: 48px; max-width: 560px;
   }
 
   /* ABOUT */
-  #about {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: start;
-    border-top: 1px solid var(--border);
-  }
-  .about-text { font-size: 16px; color: var(--muted); line-height: 1.8; }
+  #about { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 80px; align-items: start; border-top: 1px solid var(--border); }
+  .about-text { font-size: 15px; color: var(--muted); line-height: 1.85; }
   .about-text p + p { margin-top: 16px; }
+  .about-highlight { color: var(--ink); font-weight: 600; }
   .about-stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    margin-top: 40px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+    background: var(--border); border: 1px solid var(--border); margin-top: 40px;
   }
-  .stat-box {
-    background: var(--paper);
-    padding: 24px;
-  }
-  .stat-num {
-    font-family: 'DM Serif Display', serif;
-    font-size: 40px;
-    color: var(--ink);
-    line-height: 1;
-  }
-  .stat-desc { font-size: 12px; color: var(--muted); margin-top: 6px; font-family: 'DM Mono', monospace; }
-
+  .stat-box { background: var(--paper); padding: 22px; }
+  .stat-num { font-family: 'DM Serif Display', serif; font-size: 36px; color: var(--ink); line-height: 1; }
+  .stat-desc { font-size: 11px; color: var(--muted); margin-top: 5px; font-family: 'DM Mono', monospace; letter-spacing: 0.04em; }
   .about-right { padding-top: 80px; }
-  .info-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 14px 0;
-    border-bottom: 1px solid var(--border);
-    font-size: 14px;
-  }
-  .info-label { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: 0.05em; }
+  .info-row { display: flex; justify-content: space-between; padding: 13px 0; border-bottom: 1px solid var(--border); font-size: 13.5px; }
+  .info-label { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.06em; align-self: center; }
   .info-val { color: var(--ink); font-weight: 500; }
   .info-val a { color: var(--accent); text-decoration: none; }
   .info-val a:hover { text-decoration: underline; }
+  .status-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--accent2); margin-right: 6px; animation: pulse 2s infinite; }
 
   /* SKILLS */
-  #skills {
-    background: var(--paper2);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-  }
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-  }
-  .skill-group {
-    background: var(--paper2);
-    padding: 32px;
-  }
+  #skills { background: var(--paper2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .skill-group { background: var(--paper2); padding: 30px 28px; transition: background 0.2s; }
+  .skill-group:hover { background: var(--paper); }
   .skill-group-title {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 18px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid var(--border);
+    font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border);
   }
   .skill-list { list-style: none; }
-  .skill-list li {
-    font-size: 14px;
-    color: var(--muted);
-    padding: 5px 0;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .skill-list li::before {
-    content: '—';
-    color: var(--accent);
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-  }
+  .skill-list li { font-size: 13.5px; color: var(--muted); padding: 4px 0; display: flex; align-items: center; gap: 8px; }
+  .skill-list li::before { content: '—'; color: var(--accent); font-family: 'DM Mono', monospace; font-size: 11px; flex-shrink: 0; }
+  .skill-list li strong { color: var(--ink); font-weight: 500; }
 
-  /* PROJECTS / EXPERIENCE */
+  /* PROJECTS */
   #projects { border-top: 1px solid var(--border); }
+  .projects-filter { display: flex; gap: 8px; margin-bottom: 36px; flex-wrap: wrap; }
+  .filter-btn {
+    font-family: 'DM Mono', monospace; font-size: 10px; padding: 6px 14px;
+    border: 1px solid var(--border); color: var(--muted); background: transparent;
+    cursor: pointer; letter-spacing: 0.07em; text-transform: uppercase; transition: all 0.18s;
+  }
+  .filter-btn.active, .filter-btn:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
   .projects-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); }
   .project-item {
-    display: grid;
-    grid-template-columns: 200px 1fr auto;
-    gap: 40px;
-    align-items: start;
-    padding: 36px;
-    background: var(--paper);
-    transition: background 0.2s;
-    text-decoration: none;
-    color: inherit;
+    display: grid; grid-template-columns: 180px 1fr auto;
+    gap: 36px; align-items: start; padding: 32px 36px;
+    background: var(--paper); transition: background 0.2s;
+    text-decoration: none; color: inherit; position: relative;
   }
   .project-item:hover { background: var(--paper2); }
-  .project-meta {}
-  .project-year {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--muted);
-    letter-spacing: 0.05em;
-    margin-bottom: 6px;
-  }
+  .project-item.featured { border-left: 3px solid var(--accent); }
+  .project-year { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: 0.05em; margin-bottom: 8px; }
+  .project-badges { display: flex; flex-direction: column; gap: 6px; }
   .project-type {
-    display: inline-block;
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    padding: 3px 10px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    border: 1px solid;
+    display: inline-block; font-family: 'DM Mono', monospace; font-size: 9px;
+    padding: 3px 9px; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid; width: fit-content;
   }
-  .project-type.solo { border-color: var(--accent); color: var(--accent); }
-  .project-type.team { border-color: var(--accent2); color: var(--accent2); }
-  .project-content {}
-  .project-name {
-    font-family: 'DM Serif Display', serif;
-    font-size: 26px;
-    margin-bottom: 8px;
-    line-height: 1.2;
+  .project-type.ml { border-color: var(--ml); color: var(--ml); }
+  .project-type.dl { border-color: var(--accent); color: var(--accent); }
+  .project-type.kaggle { border-color: var(--gold); color: var(--gold); }
+  .project-type.ios { border-color: var(--accent2); color: var(--accent2); }
+  .project-type.fullstack { border-color: var(--travel); color: var(--travel); }
+  .project-name { font-family: 'DM Serif Display', serif; font-size: 24px; margin-bottom: 6px; line-height: 1.2; }
+  .project-tagline { font-size: 12.5px; color: var(--muted); margin-bottom: 12px; font-style: italic; }
+  .project-desc { font-size: 13.5px; color: var(--muted); line-height: 1.72; max-width: 580px; }
+  .project-highlight { color: var(--ink); font-weight: 500; }
+  .project-links { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+  .project-link {
+    font-family: 'DM Mono', monospace; font-size: 10px; padding: 5px 12px;
+    border: 1px solid; text-decoration: none; transition: all 0.18s; letter-spacing: 0.05em;
   }
-  .project-tagline {
-    font-size: 13px;
-    color: var(--muted);
-    margin-bottom: 14px;
-    font-style: italic;
+  .project-link.github { border-color: var(--border); color: var(--muted); }
+  .project-link.github:hover { border-color: var(--ink); color: var(--ink); background: var(--ink); color: var(--paper); }
+  .project-link.demo { border-color: var(--accent); color: var(--accent); }
+  .project-link.demo:hover { background: var(--accent); color: var(--paper); }
+  .project-link.model { border-color: var(--ml); color: var(--ml); }
+  .project-link.model:hover { background: var(--ml); color: var(--paper); }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 12px; }
+  .project-tag { font-family: 'DM Mono', monospace; font-size: 9.5px; padding: 3px 9px; background: var(--paper2); color: var(--muted); border: 1px solid var(--border); letter-spacing: 0.04em; }
+  .project-arrow { font-size: 18px; color: var(--muted); transition: transform 0.2s, color 0.2s; margin-top: 4px; flex-shrink: 0; }
+  .project-item:hover .project-arrow { transform: translate(4px,-4px); color: var(--accent); }
+  .featured-badge {
+    position: absolute; top: 16px; right: 16px;
+    font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.12em;
+    text-transform: uppercase; padding: 3px 10px; background: var(--accent); color: var(--paper);
   }
-  .project-desc { font-size: 14px; color: var(--muted); line-height: 1.7; max-width: 540px; }
-  .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
-  .project-tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    padding: 4px 10px;
-    background: var(--paper2);
-    color: var(--muted);
-    border: 1px solid var(--border);
-    letter-spacing: 0.05em;
-  }
-  .project-arrow {
-    font-size: 20px;
-    color: var(--muted);
-    transition: transform 0.2s, color 0.2s;
-    margin-top: 4px;
-  }
-  .project-item:hover .project-arrow { transform: translate(4px, -4px); color: var(--accent); }
 
   /* EDUCATION */
   #education { background: var(--paper2); border-top: 1px solid var(--border); }
   .edu-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); }
-  .edu-item {
-    background: var(--paper2);
-    padding: 32px 36px;
-    display: grid;
-    grid-template-columns: 240px 1fr;
-    gap: 40px;
-  }
-  .edu-period {
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    color: var(--muted);
-  }
-  .edu-degree {
-    font-family: 'DM Serif Display', serif;
-    font-size: 22px;
-    margin-bottom: 4px;
-  }
-  .edu-school { font-size: 14px; color: var(--accent); margin-bottom: 10px; }
-  .edu-location { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); margin-bottom: 12px; }
-  .edu-courses { display: flex; flex-wrap: wrap; gap: 6px; }
-  .edu-course {
-    font-size: 11px;
-    font-family: 'DM Mono', monospace;
-    padding: 3px 10px;
-    background: var(--paper);
-    border: 1px solid var(--border);
-    color: var(--muted);
-  }
+  .edu-item { background: var(--paper2); padding: 30px 36px; display: grid; grid-template-columns: 220px 1fr; gap: 40px; transition: background 0.2s; }
+  .edu-item:hover { background: var(--paper); }
+  .edu-period { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); line-height: 1.5; }
+  .edu-degree { font-family: 'DM Serif Display', serif; font-size: 21px; margin-bottom: 4px; }
+  .edu-school { font-size: 13px; color: var(--accent); margin-bottom: 8px; font-weight: 500; }
+  .edu-location { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); margin-bottom: 12px; letter-spacing: 0.05em; }
+  .edu-courses { display: flex; flex-wrap: wrap; gap: 5px; }
+  .edu-course { font-size: 10.5px; font-family: 'DM Mono', monospace; padding: 3px 10px; background: var(--paper); border: 1px solid var(--border); color: var(--muted); }
 
-  /* TRAVEL TEASER */
+  /* TRAVEL */
   #travel {
-    border-top: 1px solid var(--border);
-    background: var(--travel);
-    color: var(--paper);
-    min-height: 60vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
+    border-top: 1px solid var(--border); background: var(--travel);
+    color: var(--paper); min-height: 55vh; display: flex; align-items: center;
+    justify-content: center; text-align: center; position: relative; overflow: hidden;
   }
   .travel-bg-text {
-    position: absolute;
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(80px, 15vw, 180px);
-    color: rgba(255,255,255,0.04);
-    white-space: nowrap;
-    user-select: none;
-    letter-spacing: -0.02em;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
+    position: absolute; font-family: 'DM Serif Display', serif;
+    font-size: clamp(80px, 15vw, 180px); color: rgba(255,255,255,0.04);
+    white-space: nowrap; user-select: none; letter-spacing: -0.02em;
+    top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none;
   }
-  .travel-content { position: relative; z-index: 1; max-width: 560px; padding: 48px; }
-  .travel-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: rgba(245,242,235,0.5);
-    margin-bottom: 20px;
-  }
-  .travel-title {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(40px, 5vw, 64px);
-    line-height: 1.1;
-    margin-bottom: 20px;
-    color: var(--paper);
-  }
+  .travel-content { position: relative; z-index: 1; max-width: 520px; padding: 48px; }
+  .travel-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(245,242,235,0.45); margin-bottom: 20px; }
+  .travel-title { font-family: 'DM Serif Display', serif; font-size: clamp(38px, 5vw, 60px); line-height: 1.1; margin-bottom: 18px; color: var(--paper); }
   .travel-title em { font-style: italic; color: #f5c07a; }
-  .travel-desc { font-size: 15px; color: rgba(245,242,235,0.65); line-height: 1.7; margin-bottom: 32px; }
-  .travel-coming {
-    display: inline-block;
-    border: 1px solid rgba(245,242,235,0.3);
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    padding: 12px 28px;
-    color: rgba(245,242,235,0.6);
-  }
-  .travel-dots {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 32px;
-  }
-  .travel-dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: rgba(245,242,235,0.2);
-  }
+  .travel-desc { font-size: 14px; color: rgba(245,242,235,0.6); line-height: 1.75; margin-bottom: 32px; }
+  .travel-coming { display: inline-block; border: 1px solid rgba(245,242,235,0.25); font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; padding: 11px 26px; color: rgba(245,242,235,0.5); }
+  .travel-dots { display: flex; justify-content: center; gap: 8px; margin-top: 28px; }
+  .travel-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(245,242,235,0.18); }
   .travel-dot.active { background: #f5c07a; }
 
   /* CONTACT */
   #contact { border-top: 1px solid var(--border); }
-  .contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: start;
-  }
-  .contact-left .section-title { margin-bottom: 24px; }
-  .contact-desc { font-size: 15px; color: var(--muted); line-height: 1.7; margin-bottom: 40px; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .contact-desc { font-size: 14.5px; color: var(--muted); line-height: 1.75; margin-bottom: 36px; }
   .contact-links { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); }
-  .contact-link {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 18px 24px;
-    background: var(--paper);
-    text-decoration: none;
-    color: var(--ink);
-    transition: background 0.2s;
-  }
+  .contact-link { display: flex; justify-content: space-between; align-items: center; padding: 17px 22px; background: var(--paper); text-decoration: none; color: var(--ink); transition: background 0.2s; }
   .contact-link:hover { background: var(--paper2); }
-  .contact-link-label { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
-  .contact-link-val { font-size: 14px; color: var(--ink); }
-  .contact-link-arrow { color: var(--muted); transition: transform 0.2s; }
-  .contact-link:hover .contact-link-arrow { transform: translate(4px, -4px); color: var(--accent); }
-
-  .contact-right { padding-top: 100px; }
-  .availability-box {
-    border: 1px solid var(--border);
-    padding: 32px;
-    background: var(--paper2);
-  }
-  .avail-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--accent2);
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .avail-dot {
-    width: 7px; height: 7px;
-    border-radius: 50%;
-    background: var(--accent2);
-    animation: pulse 2s infinite;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
-  }
-  .avail-title { font-family: 'DM Serif Display', serif; font-size: 24px; margin-bottom: 10px; }
-  .avail-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
-  .avail-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
-  .avail-tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    padding: 4px 10px;
-    border: 1px solid var(--border);
-    color: var(--muted);
-    background: var(--paper);
-  }
+  .contact-link-label { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+  .contact-link-val { font-size: 13.5px; color: var(--ink); }
+  .contact-link-arrow { color: var(--muted); transition: transform 0.2s; font-size: 16px; }
+  .contact-link:hover .contact-link-arrow { transform: translate(4px,-4px); color: var(--accent); }
+  .contact-right { padding-top: 88px; }
+  .availability-box { border: 1px solid var(--border); padding: 30px; background: var(--paper2); }
+  .avail-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent2); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+  .avail-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent2); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+  .avail-title { font-family: 'DM Serif Display', serif; font-size: 22px; margin-bottom: 10px; }
+  .avail-desc { font-size: 13px; color: var(--muted); line-height: 1.65; }
+  .avail-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+  .avail-tag { font-family: 'DM Mono', monospace; font-size: 9.5px; padding: 4px 10px; border: 1px solid var(--border); color: var(--muted); background: var(--paper); }
 
   /* FOOTER */
-  footer {
-    border-top: 1px solid var(--border);
-    padding: 28px 48px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--muted);
-    letter-spacing: 0.05em;
-  }
+  footer { border-top: 1px solid var(--border); padding: 24px 52px; display: flex; justify-content: space-between; align-items: center; font-family: 'DM Mono', monospace; font-size: 10.5px; color: var(--muted); letter-spacing: 0.05em; }
   footer a { color: var(--muted); text-decoration: none; }
   footer a:hover { color: var(--ink); }
 
   /* ANIMATIONS */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .hero-eyebrow { animation: fadeUp 0.6s ease both; }
-  .hero-name { animation: fadeUp 0.6s 0.1s ease both; }
-  .hero-desc { animation: fadeUp 0.6s 0.2s ease both; }
-  .hero-cta { animation: fadeUp 0.6s 0.3s ease both; }
-  .hero-identity-cards { animation: fadeUp 0.7s 0.2s ease both; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .hero-eyebrow { animation: fadeUp 0.5s ease both; }
+  .hero-name { animation: fadeUp 0.5s 0.08s ease both; }
+  .hero-role { animation: fadeUp 0.5s 0.13s ease both; }
+  .hero-desc { animation: fadeUp 0.5s 0.18s ease both; }
+  .hero-cta { animation: fadeUp 0.5s 0.24s ease both; }
+  .hero-chips { animation: fadeUp 0.5s 0.30s ease both; }
+  .hero-right-inner { animation: fadeUp 0.6s 0.2s ease both; }
 
   /* RESPONSIVE */
   @media (max-width: 900px) {
-    nav { padding: 16px 24px; }
-    .nav-links { gap: 20px; }
+    nav { padding: 14px 22px; }
+    .nav-links { gap: 16px; }
     .hero { grid-template-columns: 1fr; }
     .hero-right { min-height: 50vh; }
-    .hero-left { padding: 60px 24px 40px; }
-    section { padding: 64px 24px; }
-    #about { grid-template-columns: 1fr; gap: 40px; }
+    .hero-left { padding: 56px 24px 36px; }
+    section { padding: 60px 24px; }
+    #about { grid-template-columns: 1fr; gap: 36px; }
     .skills-grid { grid-template-columns: 1fr; }
-    .project-item { grid-template-columns: 1fr; gap: 16px; }
-    .edu-item { grid-template-columns: 1fr; gap: 10px; }
-    .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+    .project-item { grid-template-columns: 1fr; gap: 14px; }
+    .edu-item { grid-template-columns: 1fr; gap: 8px; }
+    .contact-grid { grid-template-columns: 1fr; gap: 36px; }
     .contact-right { padding-top: 0; }
-    footer { flex-direction: column; gap: 10px; text-align: center; }
+    footer { flex-direction: column; gap: 8px; text-align: center; }
   }
 </style>
 </head>
@@ -583,49 +347,106 @@
     <li><a href="#skills">Skills</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#education">Education</a></li>
-    <li><a href="#travel" class="travel-link">Travels</a></li>
+    <li><a href="#travel">Travels</a></li>
     <li><a href="#contact">Contact</a></li>
+    <li><a href="mailto:naryagarg@gmail.com" class="nav-cta">Hire Me</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
 <section class="hero" style="padding:0;">
   <div class="hero-left">
-    <div class="hero-eyebrow">Portfolio — Data Science & Life</div>
+    <div class="hero-eyebrow">Data Scientist & ML Engineer</div>
     <h1 class="hero-name">Aryan<br><em>Garg</em></h1>
-    <p class="hero-desc">Data Scientist and ML Engineer bridging raw data and real-world products. Also a traveller collecting stories from the road.</p>
+    <div class="hero-role">MSc Data Science · Napoli Federico II · Open to Work</div>
+    <p class="hero-desc">I build machine learning systems that make predictions people trust — from end-to-end pipelines and deep learning models to deployed Streamlit applications.</p>
     <div class="hero-cta">
-      <a href="#projects" class="btn btn-fill">View Projects</a>
+      <a href="#projects" class="btn btn-fill">View Projects ↓</a>
       <a href="https://github.com/Aryan-garg-1" target="_blank" class="btn">GitHub ↗</a>
       <a href="mailto:naryagarg@gmail.com" class="btn">Email Me</a>
     </div>
-    <div class="hero-scroll">scroll to explore</div>
+    <div class="hero-chips">
+      <span class="chip ml">Machine Learning</span>
+      <span class="chip dl">Deep Learning</span>
+      <span class="chip ds">Data Science</span>
+      <span class="chip">Python</span>
+      <span class="chip">Streamlit</span>
+    </div>
   </div>
   <div class="hero-right">
-    <div class="hero-identity-cards">
-      <div class="identity-card data">
-        <div class="card-label">Identity 01 — Career</div>
-        <div class="card-heading">Data Scientist</div>
-        <div class="card-body">MSc Data Science @ Napoli Federico II. Machine learning, predictive modelling, and iOS apps that solve real problems.</div>
+    <div class="hero-right-inner">
+      <div class="stat-ticker">
+        <div class="ticker-cell">
+          <div class="ticker-num">25+</div>
+          <div class="ticker-label">Engineered features in IPL prediction</div>
+        </div>
+        <div class="ticker-cell">
+          <div class="ticker-num">83.7%</div>
+          <div class="ticker-label">CV accuracy — Titanic Kaggle</div>
+        </div>
+        <div class="ticker-cell">
+          <div class="ticker-num">6</div>
+          <div class="ticker-label">ML algorithms benchmarked</div>
+        </div>
+        <div class="ticker-cell">
+          <div class="ticker-num">5</div>
+          <div class="ticker-label">Vehicle classes classified w/ VGG16</div>
+        </div>
       </div>
-      <div class="identity-card travel">
-        <div class="card-label">Identity 02 — Life</div>
-        <div class="card-heading">Traveller</div>
-        <div class="card-body">From Jaipur to Naples and beyond. Collecting places, people, and perspectives — one trip at a time.</div>
+      <div class="hero-bio-card">
+        <div class="bio-label">Currently</div>
+        <div class="bio-title">Building & Learning in Naples</div>
+        <div class="bio-body">Pursuing MSc Data Science at Federico II while building real-world ML projects — from live Streamlit apps to deep learning classifiers. From Jaipur to Naples, driven by curiosity about data and the world.</div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- TICKER BAR -->
+<div class="ticker-bar">
+  <div class="ticker-track">
+    <span class="ticker-item"><span>◆</span> Python</span>
+    <span class="ticker-item"><span>◆</span> XGBoost</span>
+    <span class="ticker-item"><span>◆</span> LightGBM</span>
+    <span class="ticker-item"><span>◆</span> CatBoost</span>
+    <span class="ticker-item"><span>◆</span> TensorFlow</span>
+    <span class="ticker-item"><span>◆</span> Keras</span>
+    <span class="ticker-item"><span>◆</span> VGG16</span>
+    <span class="ticker-item"><span>◆</span> Scikit-learn</span>
+    <span class="ticker-item"><span>◆</span> Pandas</span>
+    <span class="ticker-item"><span>◆</span> NumPy</span>
+    <span class="ticker-item"><span>◆</span> Streamlit</span>
+    <span class="ticker-item"><span>◆</span> Feature Engineering</span>
+    <span class="ticker-item"><span>◆</span> Transfer Learning</span>
+    <span class="ticker-item"><span>◆</span> SQL</span>
+    <span class="ticker-item"><span>◆</span> Git & GitHub</span>
+    <span class="ticker-item"><span>◆</span> Python</span>
+    <span class="ticker-item"><span>◆</span> XGBoost</span>
+    <span class="ticker-item"><span>◆</span> LightGBM</span>
+    <span class="ticker-item"><span>◆</span> CatBoost</span>
+    <span class="ticker-item"><span>◆</span> TensorFlow</span>
+    <span class="ticker-item"><span>◆</span> Keras</span>
+    <span class="ticker-item"><span>◆</span> VGG16</span>
+    <span class="ticker-item"><span>◆</span> Scikit-learn</span>
+    <span class="ticker-item"><span>◆</span> Pandas</span>
+    <span class="ticker-item"><span>◆</span> NumPy</span>
+    <span class="ticker-item"><span>◆</span> Streamlit</span>
+    <span class="ticker-item"><span>◆</span> Feature Engineering</span>
+    <span class="ticker-item"><span>◆</span> Transfer Learning</span>
+    <span class="ticker-item"><span>◆</span> SQL</span>
+    <span class="ticker-item"><span>◆</span> Git & GitHub</span>
+  </div>
+</div>
+
 <!-- ABOUT -->
 <section id="about">
   <div class="about-left">
     <div class="section-label">About Me</div>
-    <h2 class="section-title">Data tells a story. I make sure it's heard.</h2>
+    <h2 class="section-title">Data tells a story. I build the pipeline to tell it.</h2>
     <div class="about-text">
-      <p>I'm a self-motivated Data Scientist currently pursuing my Master's in Data Science at the Università di Napoli Federico II, Italy. My work sits at the intersection of machine learning, statistical analysis, and product thinking.</p>
-      <p>I don't just build models — I build things people use. During the Apple Developer Academy at Federico II, I shipped iOS apps through the full lifecycle: ideation, design, development, and TestFlight beta testing with real users.</p>
-      <p>Originally from Jaipur, Rajasthan, I've built a career on curiosity — whether that's exploring a new dataset or a new city.</p>
+      <p>I'm a <span class="about-highlight">Data Scientist and ML Engineer</span> currently pursuing my Master's in Data Science at Università di Napoli Federico II, Italy. My focus is on building end-to-end machine learning systems — from raw data to deployed models.</p>
+      <p>My projects span <span class="about-highlight">predictive modelling, deep learning, computer vision, and Kaggle competitions</span>. I care about reproducible pipelines, meaningful feature engineering, and models that actually get deployed and used.</p>
+      <p>Originally from <span class="about-highlight">Jaipur, Rajasthan</span>, I've also shipped iOS apps through Apple's Developer Academy at Federico II — which gave me a product-thinking lens on everything I build in data science.</p>
     </div>
     <div class="about-stats">
       <div class="stat-box">
@@ -633,23 +454,23 @@
         <div class="stat-desc">projects shipped</div>
       </div>
       <div class="stat-box">
-        <div class="stat-num">2</div>
-        <div class="stat-desc">Apple Dev Academy programs</div>
+        <div class="stat-num">83.7%</div>
+        <div class="stat-desc">best kaggle CV score</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">25+</div>
+        <div class="stat-desc">features engineered (IPL)</div>
       </div>
       <div class="stat-box">
         <div class="stat-num">3+</div>
         <div class="stat-desc">years in data science</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-num">2</div>
-        <div class="stat-desc">languages spoken</div>
       </div>
     </div>
   </div>
   <div class="about-right">
     <div class="info-row">
       <span class="info-label">Location</span>
-      <span class="info-val">Naples, Italy (from Jaipur, India)</span>
+      <span class="info-val">Naples, Italy · Jaipur, India</span>
     </div>
     <div class="info-row">
       <span class="info-label">Email</span>
@@ -673,11 +494,11 @@
     </div>
     <div class="info-row">
       <span class="info-label">Status</span>
-      <span class="info-val" style="color:var(--accent2);">● Open to Opportunities</span>
+      <span class="info-val"><span class="status-dot"></span>Open to Opportunities</span>
     </div>
     <div class="info-row">
       <span class="info-label">Interests</span>
-      <span class="info-val">Data Science · AI · Mobile Dev · Travel</span>
+      <span class="info-val">ML · Deep Learning · AI · Travel</span>
     </div>
   </div>
 </section>
@@ -690,58 +511,59 @@
     <div class="skill-group">
       <div class="skill-group-title">Languages</div>
       <ul class="skill-list">
-        <li>Python</li>
-        <li>Swift</li>
+        <li><strong>Python</strong></li>
         <li>SQL</li>
-        <li>HTML & CSS</li>
+        <li>HTML &amp; CSS</li>
       </ul>
     </div>
     <div class="skill-group">
-      <div class="skill-group-title">Data Science & ML</div>
+      <div class="skill-group-title">Machine Learning</div>
       <ul class="skill-list">
-        <li>Machine Learning</li>
-        <li>Supervised & Unsupervised Learning</li>
-        <li>Predictive Modeling</li>
-        <li>Statistical Analysis</li>
+        <li><strong>XGBoost · LightGBM · CatBoost</strong></li>
+        <li>Scikit-learn · Random Forest</li>
+        <li>Gradient Boosting</li>
         <li>Feature Engineering</li>
-        <li>Model Evaluation</li>
+        <li>Cross-Validation · Hyperparameter Tuning</li>
+        <li>Predictive Modeling</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Deep Learning & CV</div>
+      <ul class="skill-list">
+        <li><strong>TensorFlow · Keras</strong></li>
+        <li>CNN · Transfer Learning</li>
+        <li>VGG16 · Fine-tuning</li>
+        <li>Data Augmentation</li>
+        <li>EarlyStopping · ModelCheckpoint</li>
       </ul>
     </div>
     <div class="skill-group">
       <div class="skill-group-title">Data & Analysis</div>
       <ul class="skill-list">
-        <li>Pandas & NumPy</li>
-        <li>Matplotlib & Seaborn</li>
-        <li>Data Cleaning & Preprocessing</li>
-        <li>Data Warehousing</li>
-        <li>Database Design</li>
+        <li><strong>Pandas · NumPy</strong></li>
+        <li>Matplotlib · Seaborn</li>
+        <li>EDA · Data Cleaning</li>
+        <li>Data Warehousing · SQL</li>
+        <li>Statistical Analysis</li>
       </ul>
     </div>
     <div class="skill-group">
-      <div class="skill-group-title">iOS Development</div>
+      <div class="skill-group-title">Deployment & Tools</div>
       <ul class="skill-list">
-        <li>Swift & SwiftUI</li>
-        <li>Xcode</li>
-        <li>MultipeerConnectivity</li>
-        <li>Core Data</li>
-        <li>TestFlight</li>
+        <li><strong>Streamlit</strong></li>
+        <li>Google Colab (GPU)</li>
+        <li>Jupyter Notebook</li>
+        <li>Git · GitHub</li>
+        <li>Pickle · Model Serialization</li>
       </ul>
     </div>
     <div class="skill-group">
-      <div class="skill-group-title">Tools & Design</div>
+      <div class="skill-group-title">Design & Collaboration</div>
       <ul class="skill-list">
-        <li>Git & GitHub</li>
-        <li>Figma</li>
-        <li>Miro</li>
-      </ul>
-    </div>
-    <div class="skill-group">
-      <div class="skill-group-title">Soft Skills</div>
-      <ul class="skill-list">
+        <li>Figma · Miro</li>
         <li>Team Collaboration</li>
-        <li>Communication</li>
-        <li>Problem Solving</li>
-        <li>Interpersonal Skills</li>
+        <li>Agile / Iterative Dev</li>
+        <li>Technical Communication</li>
       </ul>
     </div>
   </div>
@@ -749,19 +571,144 @@
 
 <!-- PROJECTS -->
 <section id="projects">
-  <div class="section-label">Experience & Projects</div>
+  <div class="section-label">Projects</div>
   <h2 class="section-title">Things I've built.</h2>
+
   <div class="projects-list">
 
+    <!-- IPL -->
+    <div class="project-item featured" style="text-decoration:none; color:inherit;">
+      <div class="featured-badge">Featured</div>
+      <div>
+        <div class="project-year">2024 – 2025</div>
+        <div class="project-badges">
+          <span class="project-type ml">Machine Learning</span>
+          <span class="project-type fullstack">Deployed</span>
+        </div>
+      </div>
+      <div class="project-content">
+        <div class="project-name">IPL Match Winner Prediction</div>
+        <div class="project-tagline">End-to-end ML system for predicting IPL match outcomes — live on Streamlit</div>
+        <div class="project-desc">
+          Built a complete ML pipeline using historical IPL data (2008–2025). Engineered <span class="project-highlight">40+ cricket-specific features</span> covering batting strength, bowling strength, venue performance, team form, and squad-level aggregates. Benchmarked <span class="project-highlight">6 algorithms</span> (Logistic Regression, Random Forest, Gradient Boosting, XGBoost, LightGBM, CatBoost) and deployed the best-performing model as an interactive Streamlit app with live match prediction.
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/Aryan-garg-1/IPL_Prediction_Model" target="_blank" class="project-link model">Model Training ↗</a>
+          <a href="https://iplprediction711.streamlit.app/" target="_blank" class="project-link demo">Live App ↗</a>
+          <a href="https://github.com/Aryan-garg-1/IPL_Prediction" target="_blank" class="project-link github">Streamlit Repo ↗</a>
+        </div>
+        <div class="project-tags">
+          <span class="project-tag">Python</span>
+          <span class="project-tag">XGBoost</span>
+          <span class="project-tag">LightGBM</span>
+          <span class="project-tag">CatBoost</span>
+          <span class="project-tag">Scikit-learn</span>
+          <span class="project-tag">Streamlit</span>
+          <span class="project-tag">Pandas</span>
+          <span class="project-tag">Feature Engineering</span>
+        </div>
+      </div>
+      <div class="project-arrow">↗</div>
+    </div>
+
+    <!-- Vehicle Classification -->
+    <div class="project-item">
+      <div>
+        <div class="project-year">2024</div>
+        <div class="project-badges">
+          <span class="project-type dl">Deep Learning</span>
+          <span class="project-type dl">Computer Vision</span>
+        </div>
+      </div>
+      <div class="project-content">
+        <div class="project-name">Indian Vehicle Classification</div>
+        <div class="project-tagline">VGG16 transfer learning to classify 5 Indian vehicle categories</div>
+        <div class="project-desc">
+          Built a deep learning image classifier for Auto, Bus, Tempo Traveller, Tractor, and Truck using <span class="project-highlight">VGG16 transfer learning</span>. Implemented a two-stage training strategy (feature extraction + fine-tuning), applied data augmentation, EarlyStopping, and ModelCheckpoint callbacks to prevent overfitting, and evaluated with confusion matrix, accuracy/loss curves, and prediction visualizations.
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/Aryan-garg-1/Vehicle_Clalssification" target="_blank" class="project-link github">GitHub ↗</a>
+        </div>
+        <div class="project-tags">
+          <span class="project-tag">TensorFlow</span>
+          <span class="project-tag">Keras</span>
+          <span class="project-tag">VGG16</span>
+          <span class="project-tag">Transfer Learning</span>
+          <span class="project-tag">Google Colab</span>
+          <span class="project-tag">NumPy</span>
+          <span class="project-tag">Scikit-learn</span>
+        </div>
+      </div>
+      <div class="project-arrow">↗</div>
+    </div>
+
+    <!-- Titanic -->
+    <div class="project-item">
+      <div>
+        <div class="project-year">2023 – 2024</div>
+        <div class="project-badges">
+          <span class="project-type kaggle">Kaggle</span>
+          <span class="project-type ml">ML</span>
+        </div>
+      </div>
+      <div class="project-content">
+        <div class="project-name">Titanic Survival Prediction</div>
+        <div class="project-tagline">Kaggle competition — 83.7% cross-validation accuracy with XGBoost ensemble</div>
+        <div class="project-desc">
+          Classic Kaggle binary classification challenge tackled with systematic feature engineering, missing value imputation, categorical encoding, and hyperparameter tuning. Achieved <span class="project-highlight">83.7% CV accuracy</span> using XGBoost-based ensemble modelling. Built a fully reproducible training, evaluation, and submission pipeline.
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/Aryan-garg-1/Titanic-survival-kaggle" target="_blank" class="project-link github">GitHub ↗</a>
+        </div>
+        <div class="project-tags">
+          <span class="project-tag">Python</span>
+          <span class="project-tag">XGBoost</span>
+          <span class="project-tag">Scikit-learn</span>
+          <span class="project-tag">Pandas</span>
+          <span class="project-tag">Feature Engineering</span>
+          <span class="project-tag">Seaborn</span>
+        </div>
+      </div>
+      <div class="project-arrow">↗</div>
+    </div>
+
+    <!-- MacroServer -->
+    <a href="https://github.com/Aryan-garg-1/MacroServer" target="_blank" class="project-item">
+      <div>
+        <div class="project-year">2023</div>
+        <div class="project-badges">
+          <span class="project-type fullstack">Full-stack</span>
+        </div>
+      </div>
+      <div class="project-content">
+        <div class="project-name">MacroServer + MacroClient</div>
+        <div class="project-tagline">Python backend + native macOS client for macro automation</div>
+        <div class="project-desc">
+          A personal full-stack automation tool: a Python-powered backend server paired with a native macOS Swift client. Built from architecture to deployment — an example of end-to-end systems thinking across two languages and platforms.
+        </div>
+        <div class="project-tags">
+          <span class="project-tag">Python</span>
+          <span class="project-tag">Swift</span>
+          <span class="project-tag">macOS</span>
+        </div>
+      </div>
+      <div class="project-arrow">↗</div>
+    </a>
+
+    <!-- ChatApp -->
     <a href="https://github.com/Aryan-garg-1/ChatApp" target="_blank" class="project-item">
-      <div class="project-meta">
+      <div>
         <div class="project-year">2022 – 2023</div>
-        <div class="project-type solo">Solo</div>
+        <div class="project-badges">
+          <span class="project-type ios">iOS</span>
+        </div>
       </div>
       <div class="project-content">
         <div class="project-name">ChatApp</div>
-        <div class="project-tagline">Talk to nearby strangers — no internet required</div>
-        <div class="project-desc">Offline proximity-based iOS chat using Apple's MultipeerConnectivity framework. Devices auto-discover and connect via Bluetooth and Wi-Fi Direct. Custom SwiftUI chat bubbles with hand-drawn Bézier shapes, JSON messaging, and local data persistence.</div>
+        <div class="project-tagline">Offline proximity chat — no internet required</div>
+        <div class="project-desc">
+          iOS chat app using Apple's MultipeerConnectivity framework for offline, proximity-based communication over Bluetooth and Wi-Fi Direct. Custom SwiftUI chat bubbles, JSON messaging protocol, and local data persistence.
+        </div>
         <div class="project-tags">
           <span class="project-tag">Swift</span>
           <span class="project-tag">SwiftUI</span>
@@ -772,98 +719,25 @@
       <div class="project-arrow">↗</div>
     </a>
 
+    <!-- Leafy -->
     <a href="https://github.com/Aryan-garg-1/Leafy" target="_blank" class="project-item">
-      <div class="project-meta">
+      <div>
         <div class="project-year">Jan – Apr 2023</div>
-        <div class="project-type team">Team</div>
+        <div class="project-badges">
+          <span class="project-type ios">iOS · Team</span>
+        </div>
       </div>
       <div class="project-content">
         <div class="project-name">Leafy</div>
-        <div class="project-tagline">Focus during your studies</div>
-        <div class="project-desc">iOS productivity app for stressed university students. Timer for study and break sessions, emotion journaling after each session, and full session history via Core Data. Shipped on TestFlight and iterated based on real user feedback.</div>
+        <div class="project-tagline">Focus and wellbeing app for university students — shipped on TestFlight</div>
+        <div class="project-desc">
+          iOS productivity app with Pomodoro-style study timers, post-session emotion journaling, and full session history via Core Data. Iterated from real TestFlight user feedback through multiple releases.
+        </div>
         <div class="project-tags">
           <span class="project-tag">Swift</span>
           <span class="project-tag">SwiftUI</span>
           <span class="project-tag">Core Data</span>
           <span class="project-tag">TestFlight</span>
-        </div>
-      </div>
-      <div class="project-arrow">↗</div>
-    </a>
-
-    <a href="https://github.com/Aryan-garg-1/MateZ" target="_blank" class="project-item">
-      <div class="project-meta">
-        <div class="project-year">Feb – Jun 2023</div>
-        <div class="project-type team">Team</div>
-      </div>
-      <div class="project-content">
-        <div class="project-name">MateZ</div>
-        <div class="project-tagline">Power up your play with perfect partners</div>
-        <div class="project-desc">iOS app to connect gamers worldwide through safe and positive matchmaking. Designed user interaction features for inclusive community building. Scalable architecture built in Swift with Xcode and Git version control.</div>
-        <div class="project-tags">
-          <span class="project-tag">Swift</span>
-          <span class="project-tag">SwiftUI</span>
-          <span class="project-tag">Figma</span>
-          <span class="project-tag">Xcode</span>
-        </div>
-      </div>
-      <div class="project-arrow">↗</div>
-    </a>
-
-    <a href="https://github.com/Aryan-garg-1/Brush-it-up" target="_blank" class="project-item">
-      <div class="project-meta">
-        <div class="project-year">Sep – Dec 2022</div>
-        <div class="project-type team">Team</div>
-      </div>
-      <div class="project-content">
-        <div class="project-name">ToothAid</div>
-        <div class="project-tagline">Paediatric habit formation tool</div>
-        <div class="project-desc">Gamified iOS app encouraging healthy brushing habits in children. Applied UI/UX design principles to create an engaging, child-friendly interface with logical programme flow guiding user interactions.</div>
-        <div class="project-tags">
-          <span class="project-tag">Swift</span>
-          <span class="project-tag">SwiftUI</span>
-          <span class="project-tag">Figma</span>
-          <span class="project-tag">Miro</span>
-        </div>
-      </div>
-      <div class="project-arrow">↗</div>
-    </a>
-
-    <a href="https://github.com/Aryan-garg-1/MacroServer" target="_blank" class="project-item">
-      <div class="project-meta">
-        <div class="project-year">2023</div>
-        <div class="project-type solo">Solo</div>
-      </div>
-      <div class="project-content">
-        <div class="project-name">MacroServer + MAcroClient</div>
-        <div class="project-tagline">Macro automation, server + client</div>
-        <div class="project-desc">Python-powered backend server for macro automation, paired with a native macOS Swift client. Full-stack personal tool from architecture to deployment.</div>
-        <div class="project-tags">
-          <span class="project-tag">Python</span>
-          <span class="project-tag">Swift</span>
-          <span class="project-tag">macOS</span>
-        </div>
-      </div>
-      <div class="project-arrow">↗</div>
-    </a>
-
-    <a href="https://github.com/Aryan-garg-1/Vehicle_Clalssification" target="_blank" class="project-item">
-      <div class="project-meta">
-        <div class="project-year"> Jun 2023</div>
-        <div class="project-type team">Solo</div>
-      </div>
-      <div class="project-content">
-        <div class="project-name">Vehicle Classification</div>
-        <div class="project-tagline">Indian Vehicle Classification using VGG16</div>
-        <div class="project-desc">Classified 5 Indian vehicle types (Auto, Bus, Tempo Traveller, Tractor, Truck) using VGG16 transfer learning on Google Colab. Implemented two-stage training (feature extraction + fine-tuning), used callbacks (EarlyStopping, ModelCheckpoint), and achieved strong validation accuracy. Built end-to-end pipeline: data cleaning, train/val/test split, model training, evaluation (confusion matrix, accuracy plots), and inference function.</div>
-        <div class="project-tags">
-          <span class="project-tag">Python</span>
-          <span class="project-tag">TensorFlow/Keras</span>
-          <span class="project-tag">VGG16</span>
-          <span class="project-tag">NumPy</span>
-          <span class="project-tag">Pandas</span>
-          <span class="project-tag">Scikit-learn</span>
-          <span class="project-tag">Google Colab (GPU)</span>
         </div>
       </div>
       <div class="project-arrow">↗</div>
@@ -877,7 +751,6 @@
   <div class="section-label">Education & Certifications</div>
   <h2 class="section-title">Where I learned.</h2>
   <div class="edu-list">
-
     <div class="edu-item">
       <div class="edu-period">Nov 2021 – Present</div>
       <div>
@@ -892,7 +765,6 @@
         </div>
       </div>
     </div>
-
     <div class="edu-item">
       <div class="edu-period">Sep 2022 – Jun 2023</div>
       <div>
@@ -901,14 +773,12 @@
         <div class="edu-location">Naples, Italy</div>
         <div class="edu-courses">
           <span class="edu-course">Swift & SwiftUI</span>
-          <span class="edu-course">Xcode</span>
-          <span class="edu-course">Figma</span>
-          <span class="edu-course">Miro</span>
+          <span class="edu-course">Product Design</span>
+          <span class="edu-course">Figma · Miro</span>
           <span class="edu-course">Team Collaboration</span>
         </div>
       </div>
     </div>
-
     <div class="edu-item">
       <div class="edu-period">Jan – Apr 2023</div>
       <div>
@@ -917,7 +787,6 @@
         <div class="edu-location">Naples, Italy</div>
       </div>
     </div>
-
     <div class="edu-item">
       <div class="edu-period">Jul 2017 – Jul 2020</div>
       <div>
@@ -933,7 +802,6 @@
         </div>
       </div>
     </div>
-
   </div>
 </section>
 
@@ -943,7 +811,7 @@
   <div class="travel-content">
     <div class="travel-label">Chapter 02 — The Traveller</div>
     <h2 class="travel-title">Beyond the <em>data,</em><br>there is a world.</h2>
-    <p class="travel-desc">From the pink city of Jaipur to the streets of Naples — I collect places the way others collect data points. This section is coming soon: stories, photographs, and routes from the road.</p>
+    <p class="travel-desc">From the pink city of Jaipur to the streets of Naples — collecting places the way others collect data points. This section is coming soon: stories, photographs, and routes from the road.</p>
     <div class="travel-coming">Coming Soon — Stories Loading</div>
     <div class="travel-dots">
       <div class="travel-dot active"></div>
@@ -960,34 +828,22 @@
     <div class="contact-left">
       <div class="section-label">Contact</div>
       <h2 class="section-title">Let's work together.</h2>
-      <p class="contact-desc">Open to opportunities in Data Science, Machine Learning, and iOS Development — Europe and Remote. Feel free to reach out for collaborations, roles, or just a conversation.</p>
+      <p class="contact-desc">Open to Data Scientist, ML Engineer, and Data Analyst roles across Europe and Remote. Happy to chat about collaborations, projects, or anything data.</p>
       <div class="contact-links">
         <a href="mailto:naryagarg@gmail.com" class="contact-link">
-          <div>
-            <div class="contact-link-label">Email</div>
-            <div class="contact-link-val">naryagarg@gmail.com</div>
-          </div>
+          <div><div class="contact-link-label">Email</div><div class="contact-link-val">naryagarg@gmail.com</div></div>
           <span class="contact-link-arrow">↗</span>
         </a>
         <a href="https://linkedin.com/in/aryan-garg-029b41233" target="_blank" class="contact-link">
-          <div>
-            <div class="contact-link-label">LinkedIn</div>
-            <div class="contact-link-val">aryan-garg-029b41233</div>
-          </div>
+          <div><div class="contact-link-label">LinkedIn</div><div class="contact-link-val">aryan-garg-029b41233</div></div>
           <span class="contact-link-arrow">↗</span>
         </a>
         <a href="https://github.com/Aryan-garg-1" target="_blank" class="contact-link">
-          <div>
-            <div class="contact-link-label">GitHub</div>
-            <div class="contact-link-val">Aryan-garg-1</div>
-          </div>
+          <div><div class="contact-link-label">GitHub</div><div class="contact-link-val">Aryan-garg-1</div></div>
           <span class="contact-link-arrow">↗</span>
         </a>
         <a href="tel:+918949012489" class="contact-link">
-          <div>
-            <div class="contact-link-label">Phone</div>
-            <div class="contact-link-val">+91 894 901 2489</div>
-          </div>
+          <div><div class="contact-link-label">Phone</div><div class="contact-link-val">+91 894 901 2489</div></div>
           <span class="contact-link-arrow">↗</span>
         </a>
       </div>
@@ -996,11 +852,10 @@
       <div class="availability-box">
         <div class="avail-label"><div class="avail-dot"></div>Available Now</div>
         <div class="avail-title">Open to Opportunities</div>
-        <div class="avail-desc">Currently pursuing MSc Data Science and actively looking for roles where I can contribute across data science, machine learning, or iOS development.</div>
+        <div class="avail-desc">Pursuing MSc Data Science and actively looking for roles where I can contribute in machine learning, data science, or data analysis.</div>
         <div class="avail-tags">
           <span class="avail-tag">Data Scientist</span>
           <span class="avail-tag">ML Engineer</span>
-          <span class="avail-tag">iOS Developer</span>
           <span class="avail-tag">Data Analyst</span>
           <span class="avail-tag">Europe</span>
           <span class="avail-tag">Remote</span>
@@ -1011,8 +866,8 @@
 </section>
 
 <footer>
-  <span>© 2025 Aryan Garg — Data Scientist & Traveller</span>
-  <span>Built with HTML · Hosted on GitHub Pages · <a href="https://github.com/Aryan-garg-1" target="_blank">github.com/Aryan-garg-1</a></span>
+  <span>© 2025 Aryan Garg — Data Scientist & ML Engineer</span>
+  <span>Built with HTML · <a href="https://github.com/Aryan-garg-1" target="_blank">github.com/Aryan-garg-1</a></span>
 </footer>
 
 </body>
